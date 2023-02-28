@@ -14,57 +14,6 @@ use RuntimeException;
  */
 class OrderTest extends TestCase
 {
-    public static function provideDiscount(): Generator
-    {
-        yield 'no items' => [
-            0,
-            0,
-            0,
-        ];
-
-        yield 'no discount 1' => [
-            1,
-            2,
-            0,
-        ];
-
-        yield 'no discount 2' => [
-            2,
-            2,
-            0,
-        ];
-
-        yield '5 percent' => [
-            2,
-            50,
-            5,
-        ];
-
-        yield '10 percent' => [
-            2,
-            100,
-            10,
-        ];
-
-        yield '15 percent 1' => [
-            2,
-            1000,
-            15,
-        ];
-
-        yield '15 percent 2' => [
-            2,
-            4999,
-            15,
-        ];
-
-        yield '20 percent' => [
-            2,
-            5000,
-            20,
-        ];
-    }
-
     public static function provideException(): Generator
     {
         yield 'negative items count' => [
@@ -91,13 +40,12 @@ class OrderTest extends TestCase
         new Order($itemsCount, $total);
     }
 
-    /**
-     * @dataProvider provideDiscount
-     */
-    public function testGetDiscount(int $itemsCount, float $total, int $expected): void
+    public function testConstructUsingZeros(): void
     {
-        $order = new Order($itemsCount, $total);
-        self::assertSame($expected, $order->getDiscount());
+        $order = new Order(0, 0);
+
+        self::assertSame(0, $order->getItemsCount());
+        self::assertSame(0.0, $order->getTotal());
     }
 
     public function testGetItemsCount(): void

@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Contract\OrderInterface;
 use RuntimeException;
 
-class Order
+class Order implements OrderInterface
 {
     private int $itemsCount;
     private float $total;
@@ -23,23 +24,6 @@ class Order
 
         $this->itemsCount = $itemsCount;
         $this->total = $total;
-    }
-
-    public function getDiscount(): int
-    {
-        if ($this->itemsCount < 2) {
-            return 0;
-        } elseif ($this->itemsCount >= 2 && $this->total >= 50 && $this->total < 100) {
-            return 5;
-        } elseif ($this->itemsCount >= 2 && $this->total >= 100 && $this->total < 1000) {
-            return 10;
-        } elseif ($this->itemsCount >= 2 && $this->total >= 1000 && $this->total < 5000) {
-            return 15;
-        } elseif ($this->itemsCount >= 2 && $this->total >= 5000) {
-            return 20;
-        }
-
-        return 0;
     }
 
     public function getItemsCount(): int
