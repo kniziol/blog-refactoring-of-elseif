@@ -13,13 +13,21 @@ class DiscountProvider implements DiscountProviderInterface
     {
         if ($order->getItemsCount() < 2) {
             return 0;
-        } elseif ($order->getTotal() >= 50 && $order->getTotal() < 100) {
+        }
+
+        if ($order->getTotal() >= 50 && $order->getTotal() < 100) {
             return 5;
-        } elseif ($order->getTotal() >= 100 && $order->getTotal() < 1000) {
+        }
+
+        if ($order->getTotal() >= 100 && $order->getTotal() < 1000) {
             return 10;
-        } elseif ($order->getTotal() >= 1000 && $order->getTotal() < 5000) {
+        }
+
+        if ($order->getTotal() >= 1000 && $order->getTotal() < 5000) {
             return 15;
-        } elseif ($order->getTotal() >= 5000) {
+        }
+
+        if ($order->getTotal() >= 5000) {
             return 20;
         }
 
